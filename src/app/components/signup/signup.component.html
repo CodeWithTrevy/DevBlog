@@ -1,0 +1,120 @@
+<div class="signup-container">
+  <!-- Animated Background -->
+  <div class="background-animation">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="success-modal" *ngIf="submitSuccess">
+    <div class="modal-content">
+      <div class="success-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <h3>Welcome Aboard! 🎉</h3>
+      <p>Your account has been created successfully.</p>
+    </div>
+  </div>
+
+  <!-- Signup Card -->
+  <div class="signup-card">
+    <div class="card-header">
+      <div class="icon-wrapper">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <h1>Create Account</h1>
+      <p>Join us on this amazing journey</p>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <!-- First Name -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.invalid]="isFieldInvalid('firstname')" [class.valid]="isFieldValid('firstname')">
+          <input type="text" formControlName="firstname" placeholder="First Name" class="form-control">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('firstname')">
+          <span *ngIf="f['firstname'].errors?.['required']">First name is required</span>
+          <span *ngIf="f['firstname'].errors?.['minlength']">Name must be at least 2 characters</span>
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.invalid]="isFieldInvalid('lastname')" [class.valid]="isFieldValid('lastname')">
+          <input type="text" formControlName="lastname" placeholder="Last Name" class="form-control">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('lastname')">
+          <span *ngIf="f['lastname'].errors?.['required']">Last name is required</span>
+          <span *ngIf="f['lastname'].errors?.['minlength']">Name must be at least 2 characters</span>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.invalid]="isFieldInvalid('username')" [class.valid]="isFieldValid('username')">
+          <input type="text" formControlName="username" placeholder="Username" class="form-control">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('username')">
+          <span *ngIf="f['username'].errors?.['required']">Username is required</span>
+          <span *ngIf="f['username'].errors?.['minlength']">Must be at least 3 characters</span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.invalid]="isFieldInvalid('email')" [class.valid]="isFieldValid('email')">
+          <input type="email" formControlName="email" placeholder="Email Address" class="form-control">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('email')">
+          <span *ngIf="f['email'].errors?.['required']">Email is required</span>
+          <span *ngIf="f['email'].errors?.['email']">Invalid email format</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.invalid]="isFieldInvalid('password')" [class.valid]="isFieldValid('password')">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" class="form-control">
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility('password')">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('password')">
+          <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+          <span *ngIf="f['password'].errors?.['minlength']">At least 8 characters</span>
+          <span *ngIf="f['password'].errors?.['passwordStrength']">Must include uppercase, lowercase, and number</span>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <div class="input-wrapper" 
+             [class.invalid]="isFieldInvalid('confirmPassword') || (signupForm.errors?.['passwordMismatch'] && f['confirmPassword'].touched)" 
+             [class.valid]="isFieldValid('confirmPassword') && !signupForm.errors?.['passwordMismatch']">
+          <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Confirm Password" class="form-control">
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility('confirmPassword')">
+            {{ showConfirmPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('confirmPassword') || (signupForm.errors?.['passwordMismatch'] && f['confirmPassword'].touched)">
+          <span *ngIf="f['confirmPassword'].errors?.['required']">Please confirm your password</span>
+          <span *ngIf="signupForm.errors?.['passwordMismatch']">Passwords do not match</span>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Sign Up</button>
+    </form>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <p>Already have an account? <a href="#">Sign In</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+/* Sidebar Container */
+.sidebar-left {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #7000CC #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+/* Smooth Scrollbar */
+.sidebar-left::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #7000CC 0%, #9D00FF 100%);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #9D00FF 0%, #C54BFF 100%);
+}
+
+/* Sidebar Section Card Hover */
+.sidebar-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #f1f3f5;
+  transition: all 0.3s ease;
+}
+
+.sidebar-section:hover {
+  box-shadow: 0 4px 16px rgba(112, 0, 204, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Profile Card Enhancement */
+.profile-card {
+  text-align: center;
+  background: linear-gradient(135deg, #7000CC 0%, #9D00FF 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(112, 0, 204, 0.3);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+/* Stats Section with Glow */
+.stat-item {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(112, 0, 204, 0.15);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(112, 0, 204, 0.15);
+  border-color: #9D00FF;
+}
+
+/* CTA Button with Pulse */
+.btn-primary {
+  background: linear-gradient(135deg, #7000CC 0%, #9D00FF 100%);
+  animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(157,0,255,0.4); }
+  50% { box-shadow: 0 0 20px rgba(112,0,204,0.6); }
+}
+
+/* Responsive Tweak */
+@media (max-width: 768px) {
+  .sidebar-left {
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+
+  .stats-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

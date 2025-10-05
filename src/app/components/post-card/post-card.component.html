@@ -1,0 +1,121 @@
+<article class="post-card" [class.featured]="featured">
+  <!-- Cover Image with fallback -->
+  <div class="post-cover-container">
+    <img 
+      [src]="post.coverImage || defaultCoverImage" 
+      [alt]="post.title"
+      class="post-cover-image"
+      loading="lazy"
+      (error)="onImageError($event)"
+    />
+  </div>
+
+  <div class="post-content">
+    <!-- Author Meta Information -->
+    <div class="post-meta">
+      <a 
+        [routerLink]="['/profile', post.author.name]" 
+        class="author-link"
+        [attr.aria-label]="'View ' + post.author.name + ' profile'">
+        <img 
+          [src]="post.author.profilePicture || defaultAvatar" 
+          [alt]="post.author.name + ' profile picture'"
+          class="author-avatar"
+          loading="lazy"
+          (error)="onAvatarError($event)"
+        />
+      </a>
+      <div class="author-info">
+        <a 
+          [routerLink]="['/profile', post.author.name]" 
+          class="author-name">
+          {{ post.author.name }}
+        </a>
+        <time 
+          [attr.datetime]="post.publishedAt" 
+          class="published-date">
+          {{ post.publishedAt | date:'mediumDate' }}
+        </time>
+      </div>
+      
+      <!-- Bookmark Button -->
+      <button 
+        class="bookmark-btn"
+        type="button"
+        [class.bookmarked]="isBookmarked"
+        (click)="onToggleBookmark($event)"
+        [attr.aria-label]="isBookmarked ? 'Remove bookmark' : 'Bookmark post'"
+        title="Bookmark">
+        {{ isBookmarked ? '🔖' : '📑' }}
+      </button>
+    </div>
+
+    <!-- Post Title -->
+    <h3 class="post-title">
+      <a 
+        [routerLink]="['/posts', post.slug]"
+        [attr.aria-label]="'Read article: ' + post.title">
+        {{ post.title }}
+      </a>
+    </h3>
+
+    <!-- Tags -->
+    <nav class="post-tags" aria-label="Post tags" *ngIf="post.tags && post.tags.length > 0">
+      <a 
+        *ngFor="let tag of post.tags.slice(0, maxTagsToShow); trackBy: trackByTag"
+        [routerLink]="['/tag', tag]"
+        class="tag"
+        [attr.aria-label]="'View posts tagged with ' + tag">
+        #{{ tag }}
+      </a>
+      <span class="tag-more" *ngIf="post.tags.length > maxTagsToShow">
+        +{{ post.tags.length - maxTagsToShow }} more
+      </span>
+    </nav>
+
+    <!-- Excerpt -->
+    <p class="post-excerpt">
+      {{ post.excerpt || (post.content | slice:0:150) + '...' }}
+    </p>
+
+    <!-- Interaction Bar -->
+    <div class="post-interactions">
+      <button 
+        class="interaction-btn"
+        type="button"
+        [class.active]="hasReacted"
+        (click)="onToggleReaction($event)"
+        [attr.aria-label]="hasReacted ? 'Remove reaction' : 'Add reaction'"
+        [attr.aria-pressed]="hasReacted">
+        <span class="icon">❤️</span>
+        <span class="count">{{ post.reactions | number }}</span>
+        <span class="label">{{ post.reactions === 1 ? 'reaction' : 'reactions' }}</span>
+      </button>
+
+      <a 
+        [routerLink]="['/posts', post.slug]"
+        fragment="comments"
+        class="interaction-btn"
+        [attr.aria-label]="'View ' + post.comments + ' comments'">
+        <span class="icon">💬</span>
+        <span class="count">{{ post.comments | number }}</span>
+        <span class="label">{{ post.comments === 1 ? 'comment' : 'comments' }}</span>
+      </a>
+
+      <button 
+        class="interaction-btn"
+        type="button"
+        (click)="onShare($event)"
+        aria-label="Share post">
+        <span class="icon">🔗</span>
+        <span class="label">Share</span>
+      </button>
+
+     
+      <span class="reading-time" *ngIf="post.readingTime">
+        <span class="icon">📖</span>
+        {{ post.readingTime }} min read
+      </span>
+    </div>
+  </div>
+</article>
