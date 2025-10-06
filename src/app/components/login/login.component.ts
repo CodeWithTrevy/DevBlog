@@ -15,6 +15,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPassword = false;
   loginSuccess = false;
+  loginError: any;
 
   constructor(
     private fb: FormBuilder,
@@ -36,15 +37,20 @@ export class LoginComponent {
       const { username, password } = this.loginForm.value;
 
       this.userService.login(username, password).subscribe({
-        next: (res: { token: string; }) => {
+        next: (res: {
+          accessToken: string; refreshToken: string; 
+        }) => {
           console.log('Login success:', res);
-          localStorage.setItem('token', res.token); // store JWT
+          // localStorage.setItem('token', res.token);
+          localStorage.setItem('AccessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+
           this.loginSuccess = true;
 
-          setTimeout(() => {
-            this.loginSuccess = false;
-            this.router.navigate(['/home']); // navigate after login
-          }, 1500);
+          // setTimeout(() => {
+          //   this.loginSuccess = false;
+          //   this.router.navigate(['/home']); 
+          // }, 1500);
         },
         error: (err: any) => {
           console.error('Login failed:', err);
