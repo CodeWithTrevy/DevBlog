@@ -28,7 +28,7 @@ export class SignupComponent {
     }, { validators: this.passwordMatchValidator });
   }
 
-  // Custom password validator
+  
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
     if (!value) return null;
@@ -51,11 +51,11 @@ export class SignupComponent {
     else this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-  // Form submit
+ 
   onSubmit(): void {
     if (this.signupForm.valid) {
       const user: User = this.signupForm.value;
-      delete user.confirmPassword; // remove confirmPassword before sending
+      delete user.confirmPassword; 
 
       this.userService.save(user).subscribe({
         next: (res) => {

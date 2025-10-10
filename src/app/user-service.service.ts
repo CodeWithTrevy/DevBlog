@@ -13,12 +13,12 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) {}
 
-  // GET all users
+  
   public findAll(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:8080/api/users/allUsers');
   }
 
-  // POST add user
+  
   public save(user: User): Observable<User> {
     return this.http.post<User>('http://localhost:8080/api/users/addUser', user);
   }

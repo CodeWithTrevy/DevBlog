@@ -26,7 +26,7 @@ export class JwtInterceptor implements HttpInterceptor {
             return this.http.post<{ accessToken: string }>('/api/auth/refresh', { refreshToken }).pipe(
               switchMap(res => {
                 localStorage.setItem('token', res.accessToken);
-                // Retrying with original request with new access token
+                
                 const retryReq = req.clone({ setHeaders: { Authorization: `Bearer ${res.accessToken}` } });
                 return next.handle(retryReq);
               })

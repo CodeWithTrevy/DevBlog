@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { UserServiceService } from 'app/user-service.service';
+import { AuthHomepageComponent } from '../auth-homepage/auth-homepage.component';
 
 @Component({
   selector: 'app-login',
@@ -47,10 +48,10 @@ export class LoginComponent {
 
           this.loginSuccess = true;
 
-          // setTimeout(() => {
-          //   this.loginSuccess = false;
-          //   this.router.navigate(['/home']); 
-          // }, 1500);
+          setTimeout(() => {
+            this.loginSuccess = false;
+            this.router.navigate(['/auth-homepage']); 
+          }, 1500);
         },
         error: (err: any) => {
           console.error('Login failed:', err);

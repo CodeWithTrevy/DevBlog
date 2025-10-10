@@ -8,7 +8,18 @@
   </div>
   
   <div class="header-right">
-    <button class="btn btn-secondary" routerLink="/login">Login</button>
-    <button class="btn btn-primary" routerLink="/signup">Create Account</button>
+   
+    <ng-container *ngIf="!authService.isLoggedIn(); else loggedIn">
+      <button class="btn btn-secondary" routerLink="/login">Login</button>
+      <button class="btn btn-primary" routerLink="/signup">Create Account</button>
+    </ng-container>
+
+   
+    <ng-template #loggedIn>
+      <button class="btn btn-secondary" routerLink="/post">Create post</button>
+      <button class="btn btn-primary" (click)="logout()">Logout</button>
+     
+
+    </ng-template>
   </div>
 </header>
