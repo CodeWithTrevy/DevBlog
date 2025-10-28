@@ -1,0 +1,44 @@
+<div class="post-list-container">
+  <h1>All Posts</h1>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    <p>Loading posts...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="loadPosts()">Retry</button>
+  </div>
+
+  <!-- Posts Grid -->
+  <div *ngIf="!loading && !error && posts.length > 0" class="posts-grid">
+    <div *ngFor="let post of posts" class="post-card">
+
+      <!-- Post Title clickable to expand content -->
+      <h2 class="post-title" (click)="togglePostContent(post)">
+        {{ post.title }}
+      </h2>
+
+      <!-- Post Meta Information -->
+      <div class="post-meta">
+        <span class="reading-time">{{ post.readingTime }} min read</span>
+        <button class="like-button" [class.liked]="isLikedByCurrentUser(post)" (click)="likePost(post)"> <span class="emoji">{{ isLikedByCurrentUser(post) ? '❤️' : '🤍' }}</span> <span class="count">{{ post.likeCount }}</span> </button>
+        <span class="comments">💬 0</span>
+      </div>
+
+      <!-- Full Content, shown only if expanded -->
+      <div *ngIf="post.showContent" class="post-content" [innerHTML]="post.content"></div>
+
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && posts.length === 0" class="empty-state">
+    <p>No posts available yet.</p>
+  </div>
+
+  
+  </div>
+
