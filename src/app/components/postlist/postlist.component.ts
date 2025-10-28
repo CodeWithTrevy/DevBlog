@@ -4,11 +4,10 @@ import { PostService } from 'app/services/post.service';
 import { Post } from 'app/posts';
 
 @Component({
-  selector: 'app-post-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './postlist.component.html',
-  styleUrls: ['./postlist.component.css']
+    selector: 'app-post-list',
+    imports: [CommonModule],
+    templateUrl: './postlist.component.html',
+    styleUrls: ['./postlist.component.css']
 })
 export class PostListComponent implements OnInit {
   posts: Post[] = [];

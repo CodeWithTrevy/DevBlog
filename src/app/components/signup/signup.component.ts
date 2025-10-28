@@ -5,11 +5,10 @@ import { UserServiceService } from 'app/user-service.service';
 import { User } from 'app/user';
 
 @Component({
-  selector: 'app-signup',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+    selector: 'app-signup',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
   signupForm: FormGroup;

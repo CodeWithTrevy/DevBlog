@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-post-creator',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './post-creator.component.html',
-  styleUrls: ['./post-creator.component.css']
+    selector: 'app-post-creator',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './post-creator.component.html',
+    styleUrls: ['./post-creator.component.css']
 })
 export class PostCreatorComponent {
   activeTab: 'edit' | 'preview' = 'edit';
